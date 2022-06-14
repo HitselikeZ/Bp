@@ -1,0 +1,54 @@
+package de.hitselikez.inv;
+
+import de.hitselikez.main.Main;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+
+public class inv_listener implements Listener {
+
+    @EventHandler
+    public void onClick(InventoryClickEvent e) {
+
+
+        if (e.getCurrentItem().equals(Inv.zurück)) {
+
+            e.setCancelled(true);
+
+
+            if (Main.i > 0) Main.i--;
+
+            e.getWhoClicked().openInventory(Main.inv[Main.i]);
+
+        } else if (e.getCurrentItem().equals(Inv.weiter)) {
+
+            e.setCancelled(true);
+
+
+            if (Main.i < 3) Main.i++;
+
+            e.getWhoClicked().openInventory(Main.inv[Main.i]);
+
+        }
+
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent ev) {
+
+        for (int i = 0; i != 3; i++) {
+
+            if (ev.getInventory().equals(Main.inv[i])) {
+
+                Main.i = 0;
+
+            }
+
+        }
+
+
+
+    }
+
+}
