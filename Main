@@ -1,0 +1,40 @@
+package de.hitselikez.main;
+
+import de.hitselikez.cmd.BP;
+import de.hitselikez.inv.Inv;
+import de.hitselikez.inv.inv_listener;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class Main extends JavaPlugin {
+
+    public static String sys = "§6[System] §7";
+    public static String noperms = sys + "Dazu hast du keine Rchte !";
+
+    public static int i = 0;
+
+    public static Inventory[] inv = new Inventory[3];
+
+    @Override
+    public void onEnable() {
+
+        Bukkit.getServer().getConsoleSender().sendMessage("§aDas PLugin wurde gestartet !");
+
+        Inv.reginvs();
+        Inv.setinvs();
+
+        getCommand("bp").setExecutor(new BP());
+
+        Bukkit.getPluginManager().registerEvents(new inv_listener(), this);
+
+
+    }
+
+    @Override
+    public void onDisable() {
+
+        Bukkit.getServer().getConsoleSender().sendMessage("§4Das PLugin wurde gestoppt !");
+
+    }
+}
